@@ -4,8 +4,9 @@ from PIL import Image
 
 def sample(x, y, num_of_sample_directions=64):
     s = 0.0
-    for _ in range(num_of_sample_directions):
-        random_rad = 2 * math.pi * random.uniform(0.0, 1.0)
+    for i in range(num_of_sample_directions):
+        # random_rad = 2 * math.pi * random.uniform(0.0, 1.0)
+        random_rad = 2 * math.pi * (i + random.uniform(0.0, 1.0)) / num_of_sample_directions
         s += trace(x, y, math.cos(random_rad), math.sin(random_rad))
     return s / num_of_sample_directions # * 2 * math.pi
 
@@ -34,7 +35,7 @@ def main():
     for h in range(height):
         for w in range(width):
             pixels[h, w] = int(min(sample(h / float(height), w / float(width)) * 255.0, 255.0))
-    img.save("moon1.png")
+    img.save("moon2.png")
 
 
 if __name__ == '__main__':
